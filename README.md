@@ -146,11 +146,10 @@ Both domain packs are containerized with multi-stage Dockerfiles and Docker Comp
 │   ├── Dockerfile                  # Lightweight Python 3.11 runtime (PyTorch CPU, ONNX, HuggingFace)
 │   ├── docker-compose.yml          # Services: ollama, llm-init, trainer, web
 │   └── llm/Modelfile               # Ollama system prompt, parameters, chemistry persona
-├── elec/
-│   ├── Dockerfile                  # Electronics Python 3.11 runtime
-│   ├── docker-compose.yml          # Services: ollama, llm-init, trainer, web
-│   └── llm/Modelfile               # Electronics persona and bench safety guidelines
-└── Dockerfile                      # Root unified training and chat runtime
+└── elec/
+    ├── Dockerfile                  # Electronics Python 3.11 runtime
+    ├── docker-compose.yml          # Services: ollama, llm-init, trainer, web
+    └── llm/Modelfile               # Electronics persona and bench safety guidelines
 ```
 
 ### Quickstart Commands
@@ -199,7 +198,6 @@ This allows the neural network to be compiled directly into **ESP-IDF** or **Ard
 
 ```
 ├── .licenses/                      # Component open-source licenses
-├── artifacts/                      # Exported models (.onnx, .pt, .h) & RAG indices
 ├── chem/                           # Specialized Chemistry Pack
 │   ├── artifacts/                  # Chemistry model checkpoints & embedded headers
 │   ├── dev/                        # Developer tests (selftest.py, eval.py)
@@ -245,10 +243,7 @@ This allows the neural network to be compiled directly into **ESP-IDF** or **Ard
 ├── report_text.txt                 # Extracted text of extended academic report
 ├── iqo_bot_extended_report.pdf     # Formal academic extended report (English)
 ├── iqo_bot_extended_report_ar.pdf  # Formal academic extended report (Arabic)
-├── 1 Student Project Sheet Template.docx # Student project proposal sheet
-├── central_brain.py                # Central chat router with RAG
-├── central_chat.py                 # Unified CLI chat interface
-└── docker-compose.yml              # Root container configuration
+└── 1 Student Project Sheet Template.docx # Student project proposal sheet
 ```
 
 ---

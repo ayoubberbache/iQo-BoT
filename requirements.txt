@@ -1,5 +1,0 @@
-torch>=2.2
-numpy
-onnx
-onnxruntime
-psutil
