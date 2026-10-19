@@ -1,0 +1,8 @@
+dev
+finetune
+llm
+__pycache__
+*.pt
+*.onnx
+*.h
+artifacts

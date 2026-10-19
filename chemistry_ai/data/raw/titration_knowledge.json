@@ -1,0 +1,83 @@
+[
+  {
+    "topic": "ACID_BASE_TITRATION",
+    "title": "Strong Acid - Strong Base Titration (HCl + NaOH)",
+    "equation": "HCl(aq) + NaOH(aq) -> NaCl(aq) + H2O(l)",
+    "equivalence_ph": 7.0,
+    "indicator_recommended": "Phenolphthalein",
+    "indicator_color_transition": "Colorless in acid, permanent faint faint pink at equivalence point (pH 8.2-10.0)",
+    "procedure_steps": [
+      "Rinse burette with small volume of standard NaOH solution before filling.",
+      "Ensure burette tip is filled with solution and has no trapped air bubbles.",
+      "Pipette exactly 20.00 mL or 25.00 mL of unknown HCl into an Erlenmeyer flask.",
+      "Add 2 to 3 drops of phenolphthalein indicator. Swirl flask.",
+      "Record initial burette volume reading at eye level at the bottom of the meniscus.",
+      "Titrate while swirling continuously until a single drop causes a persistent faint pink color lasting 30 seconds."
+    ],
+    "guidance_speech": "For HCl and NaOH titration, use phenolphthalein. The endpoint is reached when a single drop turns the colorless solution to a faint, persistent pink. If it turns dark magenta, you have overshot the endpoint.",
+    "lcd_message": "TITRATION: HCL+NAOH\nTARGET: FAINT PINK",
+    "led_color": "GREEN",
+    "arm_target": "BURETTE_STAND",
+    "triggers": ["titration hcl naoh", "strong acid strong base", "endpoint of hcl and naoh", "neutralization titration"]
+  },
+  {
+    "topic": "INDICATOR_TRANSITIONS",
+    "title": "Indicator Selection and Endpoints",
+    "data": [
+      {
+        "name": "Phenolphthalein",
+        "ph_range": "8.2 - 10.0",
+        "acid_color": "Colorless",
+        "base_color": "Pink / Magenta",
+        "suitability": "Strong Acid - Strong Base, Weak Acid - Strong Base"
+      },
+      {
+        "name": "Methyl Orange",
+        "ph_range": "3.1 - 4.4",
+        "acid_color": "Red",
+        "base_color": "Yellow",
+        "suitability": "Strong Acid - Weak Base"
+      },
+      {
+        "name": "Bromothymol Blue",
+        "ph_range": "6.0 - 7.6",
+        "acid_color": "Yellow",
+        "base_color": "Blue",
+        "suitability": "Strong Acid - Strong Base neutral point"
+      }
+    ],
+    "guidance_speech": "Phenolphthalein is ideal for strong acid with strong base titrations because the pH jump spans pH four to ten. Look for the very first permanent pale pink coloration.",
+    "lcd_message": "INDICATOR GUIDE:\nPALE PINK = ENDPT",
+    "led_color": "GREEN",
+    "arm_target": "BURETTE_STAND",
+    "triggers": ["which indicator to use", "indicator for titration", "phenolphthalein color change", "methyl orange endpoint"]
+  },
+  {
+    "topic": "MENISCUS_READING",
+    "title": "Burette Meniscus Technique",
+    "guidance_speech": "Position your eye level horizontally with the liquid level in the burette. Read the exact graduation at the bottom of the concave meniscus to within plus or minus 0.02 milliliters.",
+    "lcd_message": "BURETTE READING:\nBOTTOM OF MENISCUS",
+    "led_color": "GREEN",
+    "arm_target": "BURETTE_STAND",
+    "triggers": ["how to read burette", "read meniscus", "top or bottom of meniscus", "burette parallax error"]
+  },
+  {
+    "topic": "TITRATION_ERROR_OVERSHOOT",
+    "title": "Overshot Endpoint Troubleshooting",
+    "guidance_speech": "A dark magenta color means the titration endpoint was overshot by excess base. You must discard this run and repeat, adding titrant drop by drop near the expected volume.",
+    "lcd_message": "OVERSHOT ENDPOINT!\nDISCARD & RE-RUN",
+    "led_color": "AMBER",
+    "arm_target": "CHEMICAL_WASTE",
+    "triggers": ["dark pink solution", "overshot endpoint", "solution turned dark magenta", "added too much naoh"]
+  },
+  {
+    "topic": "CALCULATION_FORMULA",
+    "title": "Molarity and Neutralization Stoichiometry",
+    "formula": "C_acid * V_acid = C_base * V_base (for 1:1 monoprotic stoichiometry)",
+    "guidance_speech": "Use the neutralization equivalence formula: C acid times V acid equals C base times V base. For diprotic acids like sulfuric acid, remember each mole of acid delivers two moles of protons.",
+    "lcd_message": "FORMULA: Ca*Va=Cb*Vb\nMONOPROTIC 1:1",
+    "led_color": "GREEN",
+    "arm_target": "BENCH_WORKSTATION",
+    "triggers": ["calculate molarity", "formula for concentration", "c1v1 equals c2v2", "how to calculate unknown acid concentration"]
+  }
+]

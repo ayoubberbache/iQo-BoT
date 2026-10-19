@@ -1,0 +1,25 @@
+# Python caches and test output
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+venv/
+
+# Generated model artifacts
+artifacts/
+*.pt
+*.onnx
+*.h
+
+# Local development and archives
+dev/
+*.zip
+*.docx
+*.pdf
+*.bat
+
+# Build and editor files
+.git/
+.gitignore
+.vscode/
+.idea/

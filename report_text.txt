@@ -1,0 +1,366 @@
+=== PAGE 1 ===
+IQO
+IQO Bot
+AdaptiveMultimodalLaboratoryAssistantforAcademicEnvironments
+Central School-Server AI Hosting•Distributed Low-Cost Bench Nodes•Dual Delivery
+Project Members:Berbache Ayoub•Filalli Yacine Siradj Eddin•Malem Mohamed Mahdi
+Academic Supervision:Supervised by Pr. Athmani.S
+Software Engineering & Applied Intelligent Systems Module
+1. Project Overview & Problem Statement
+Highereducationlaboratoriesinengineering, physicalsciences, andtechnologyfacethreesystemicoperationalchallenges:
+1.High Student-to-Instructor Ratio:A single instructor typically supervises 30 to 40 students simultaneously
+across 15 to 20 workbench stations, creating instructional bottlenecks and delayed student feedback during practical
+lab procedures.
+2.Laboratory Safety & Equipment Hazards:Introductory students frequently risk personal injury or hardware
+destruction due to incorrect wiring (short circuits, reverse polarity), improper chemical reagent handling, or exceeding
+rated power limits.
+3.Prohibitive T echnology Adoption Costs:Existing commercial intelligent laboratory robotics require dedicated
+high-performance edge computing units (e.g., NVIDIA Jetson Orin at $500+ per bench), making campus-wide lab
+deployments financially infeasible.
+The IQO Bot Solution:An adaptive multimodal assistant designed to provide real-time, non-invasive bench guidance.
+To overcome cost barriers, the AI intelligence is centralized on the existing university server infrastructure, while each
+student workbench hosts an ultra-low-cost client node ($63 BOM) with stationary non-locomotive kinematics.
+2. Core Architectural Paradigm: Central University Server Hosting
+Rather than distributing costly edge GPUs across individual student desks, IQO Bot decouples perception and actuation
+from neural reasoning:
+•Central School Server (Inference Core):Hosted on existing campus server or workstation hardware. Utilizes
+open-source quantized 4-bit Small Language Models (e.g., LLaMA-3 8B, Qwen-2.5 7B) served via Ollama or vLLM
+over the university local area network (LAN). This completely eliminates per-token cloud API fees ($0 ongoing
+operating cost) and ensures 100% student privacy and zero data leakage.
+•Lightweight W orkbench Client Nodes:Compact, affordable microcomputing units (Raspberry Pi 4 / ESP32-S3)
+interfacing with a standard USB webcam, microphone array, and 3-DOF articulated pointer arm.
+•Deterministic Safety Guardrails:Critical laboratory safety rules (e.g., electrical overcurrent thresholds, banned
+chemical mixtures) are enforced via local deterministic regex/rule filters prior to LLM generation, ensuring zero
+hallucination on safety-critical directives.
+3. Graph 1: System Interaction Lifecycle & State Machine
+The continuous operational cycle of IQO Bot follows a five-stage reactive loop from student bench arrival to task
+completion:
+1. Standby / Idle
+(Webcam Motion Detect)
+2. Student Present
+(Session Wake & Focus)
+3. Multimodal Input
+(Speech Audio / Vision Frame)
+4. School Server LLM
+(Quantized RAG Inference)
+Safety Hazard
+Check?
+5. Bench Output
+(Pointer Arm + Speech TTS)
+Presence Query / Gesture
+LAN Stream
+Proposed PlanSafe
+Hazard Detected: Immediate Audio Alarm & F reeze Arm
+Figure 1: Closed-loop bench interaction pipeline featuring local safety override and centralized server inference.
+1
+=== PAGE 2 ===
+Technical Specifications & Architecture Master Tables
+Comprehensive Hardware Bill of Materials, System Subsystems, and Domain Demonstration Matrix
+3.1. Subsystem Architecture & T echnology Stack
+The complete system is partitioned into modular, loosely coupled subsystems operating across the local area network:
+Subsystem Core Functionality Software Stack / Libraries Hardware Allocation Latency
+Workbench Client
+Node
+Captures AV streams, communi-
+cates with server via WebSockets,
+drives servos.
+Python 3.10, OpenCV, PyAu-
+dio, WebSockets, pigpio.
+Raspberry Pi 4 (2GB) or
+ESP32-S3 bench unit.
+<15ms
+Central AI ServerHosts quantized open-source LLM,
+performs RAG retrieval, runs pro-
+fessor admin panel.
+Ollama / vLLM, LLaMA-3
+8B (Q4_K_M), ChromaDB,
+FastAPI.
+Existing University Server
+(CPU or single GPU).
+180–250ms
+Perception EnginePerson detection, student hands
+tracking, breadboard/beaker visu-
+al inspection.
+YOLOv8-nano (CPU opti-
+mized), MediaPipe Hands,
+OpenCV.
+Edge client CPU
+(lightweight) or Server
+batch.
+<40ms
+Speech InteractionKeyword wake, local speech-to-
+text transcription, natural voice
+synthesis.
+Whisper.cpp(quantizedsmall),
+Piper TTS / espeak-ng.
+Shared: Client capture→
+Server transcription.
+<280ms
+Actuator ControllerComputes inverse kinematics for
+3-DOF pointer arm and 2-DOF ex-
+pressive pan-tilt head.
+Micro-ROS / Servo PWM con-
+troller, Python Kinematics.
+3x SG90 / MG90S metal
+gear servos, I2C driver.
+<30ms
+3D Web SimulatorDigital Twin for remote dry-run
+simulation and distance learning s-
+tudents.
+Three.js, WebGL, WebSockets,
+HTML5 Canvas.
+Student web browser (zero
+local install).
+60 FPS
+Table 1: Comprehensive breakdown of IQO Bot software, hardware, and operational latency specifications.
+3.2. Hardware Bill of Materials (BOM) & Economic Cost Optimization
+Table 2 details the concrete cost optimization achieved by replacing edge-heavy GPU processors with a centralized
+school-server paradigm:
+Functional Component Proposed Low-Cost Model Industrial Baseline (Jetson) Savings / Unit
+Edge Compute ProcessorRaspberry Pi 4 (2GB RAM) / ESP32-
+S3 ($35.00)
+NVIDIA Jetson Orin Nano Devel-
+oper Kit ($499.00)
+93.0%($464.00)
+Visual Sensor1080p Standard USB Webcam with
+Autofocus ($14.00)
+Intel RealSense D435 Depth Cam-
+era ($329.00)
+95.7%($315.00)
+Audio Capture & OutputUSBDirectionalMic+3WMiniSpeak-
+er ($10.00)
+ReSpeaker 4-Mic Array + Ampli-
+fied Unit ($55.00)
+81.8%($45.00)
+Actuation & Gestures3x MG90S Metal-Gear Micro Servos
+($7.50)
+Dynamixel XL430-W250 Smart
+Servos ($180.00)
+95.8%($172.50)
+Chassis & Bench Clamp3D Printed PLA Desk Clamp Structure
+($4.50)
+CNC Milled Aluminum Arm & Lo-
+comotion Base ($250.00)
+98.2%($245.50)
+AI Inference HostingCentral School Server (Ollama, $0 in-
+cremental)
+Commercial Cloud LLM Subscrip-
+tion ($1,200/year)
+100%($0.00 /
+token)
+Total Cost per Station $71.00(Complete Workbench Assis-
+tant)
+$1,313.00(Dedicated Hardware
+Platform)
+94.6% Reduction
+Total for 30-Bench Lab $2,130.00(Full University Laborato-
+ry)
+$39,390.00(Prohibitive Capital
+Expense)
+Save $37,260.00
+Table 2: Detailed Bill of Materials (BOM) comparing IQO Bot low-cost design against conventional commercial robotics.
+3.3. Multi-Domain Demonstration Scenario Mapping
+Table 3 summarizes the six demonstrative laboratory modes, their educational focus, and proof-of-concept trigger
+behaviors:
+Demonstration
+Mode
+Target Curriculum Simulated Student Trigger / In-
+put
+IQO Bot Demonstrative Response
+1. ChemistryGeneral & Analytical Chem Webcam detects missing goggles; stu-
+dent asks about mixing reagents.
+Voice hazard alarm, LED flashes am-
+ber, points to eye-wash and fume hood.
+2. ElectronicsCircuit Theory & Devices Student: “My 555 astable multivibra-
+tor isn’t oscillating.”
+RecallsT= 0.693(R 1 + 2R2)C; points
+arm directly to pin 7 (Discharge).
+3. Power & Elec-
+tricity
+AC Circuits & Machines Student query on capacitor bank siz-
+ing for 3-phase power factor.
+ComputesQ c =P(tanφ 1−tanφ 2);
+monitors current limit to prevent trip.
+4. Computer Sci-
+ence
+Embedded Systems & R-
+TOS
+Serial terminal crashes with Guru
+Meditation Error / NULL pointer.
+Parses UART dump, flags uninitialized
+task queue handle, points to code line.
+5. Study AssistantLaboratory Methodology Student: “Just tell me the answer to
+lab question 3.”
+Applies Socratic method; asks lead-
+ing guiding question; tracks remaining
+time.
+6. Extensible Plu-
+gin
+Custom Academic Faculty Professor uploads 12-line YAML file
+for new Optics Lab.
+Dynamically parses laser safety rules
+and wavelength lookup without recom-
+pile.
+Table 3: Mapping of domain modes to simulated educational triggers and demonstrative robotic interventions.
+2
+=== PAGE 3 ===
+Demonstrative Case Studies & Domain Scenarios
+Proof-of-Concept Illustrative Examples (Simulated Laboratory Interactions)
+Demonstration Note:The following domain modes represent demonstrative proof-of-concept test cases designed to evaluate IQO Bot’s
+multimodal interaction, safety filtering, and pointing kinematics across representative academic practical sessions.
+Demo 1: Chemistry (Titration & Safety)
+Simulated Scenario:Acid-Base Neutralization Titration (HCl+
+NaOH).
+Sensory Input:Overhead webcam detects student without safety
+goggles holding concentrated acid beaker.
+Student Voice Query:“Can I add water directly into the acid
+flask to dilute it?”
+IQO Bot Intervention:
+•Audio Alert:“Caution! Never pour water into concentrated
+acid due to violent exothermic splashing (−∆H). Always add
+acid slowly to water.”
+•Visual / Actuation:RGB matrix flashes amber alert; 3-DOF
+pointer arm points directly toward the safety goggle rack and
+PPE station.
+Demo 2: Electronics (Circuit Debugging)
+Simulated Scenario:555 Timer Astable Multivibrator.
+Sensory Input:Breadboard webcam frame + student query.
+Student Voice Query:“Why is the LED continuously ON in-
+stead of blinking at 2Hz?”
+IQO Bot Intervention:
+•Reasoning:Computes formulaf= 1.44(R1 +2R2 )C. Detects pin 7
+(Discharge) floating on breadboard.
+•Response:“Your timing capacitorC 1 cannot discharge. Con-
+nect pin 7 betweenR1 andR 2.”
+•Actuation:Articulated arm points laser marker to column 15,
+row E.
+Demo 3: Electricity & Power F actor
+Simulated Scenario:3-Phase Induction Motor Power Factor
+(cosφ).
+Student Voice Query:“We haveP= 2.2kW withcosφ= 0.72.
+What capacitor bank is needed to reach 0.95?”
+IQO Bot Intervention:
+•Calculation:Computesφ 1 = arccos(0.72) = 43.9 ◦,φ 2 =
+arccos(0.95) = 18.2 ◦;Q c = 2200·(tan 43.9 ◦−tan 18.2 ◦) =
+1.39kVAR.
+•Safety Check:Monitors clamp meter reading; warns student:
+“Total line current is8.4A. Keep within bench breaker rating
+(16A).”
+Demo 4: Computer Science (R TOS Crash)
+Simulated Scenario:ESP32 Microcontroller FreeRTOS Task
+Crash.
+Sensory Input:UART Serial console stream over USB.
+Student Voice Query:“My firmware boots but throws ‘Guru
+Meditation Error: Core 1 panic’ after 5 seconds.”
+IQO Bot Intervention:
+•Diagnostic:Analyzes PC crash register dump. Detects unini-
+tializedxQueueSend()pointer.
+•Response:“Task ‘SensorTask’ attempted to push to a NULL
+queue handle. Verify that ‘xQueueCreate()’ executes prior to
+task invocation.”
+Demo 5: Study Assistant (Socratic T utor)
+Simulated Scenario:Pre-Lab Worksheet & Step-by-Step Guid-
+ance.
+Student Voice Query:“Just give me the formula and final an-
+swer for question 4 on Thévenin equivalence.”
+IQO Bot Intervention:
+•Pedagogical Filter:Refuses direct solution delivery.
+•Socratic Prompt:“To findR th, what must you do to the in-
+dependent voltage sources first? Consider whether they become
+short or open circuits.”
+•Session Monitor:“Note: 25 minutes remaining in this lab
+practical.”
+Demo 6: Extensible Plugin (Optics Lab)
+SimulatedScenario:ProfessoraddsnewOpticsModuleviaYAM-
+L.
+Configuration File (optics_mode.yaml):
+mode_name: Optics_and_Photonics
+rag_dataset: /curriculum/optics_lab.pdf
+safety_rules:
+- trigger: "class_3b_laser"
+action: "REQUIRE_SAFETY_GOGGLES"
+speech: "Put on OD4+ protective laser glasses!"
+pointing_targets: ["diffraction_grating", "photodetector"]
+Runtime Result:Assistant immediately supports laser safety
+alarms and beam alignment pointing without recompiling software.
+3.4. Graph 2: Domain Mode Dispatcher & Safety Guardrail Pipeline
+Student Audio /
+Vision Frame
+Deterministic Safety Guard
+(Zero-Tolerance Limits)
+Domain Router
+(Intent Classifier)
+Chemistry Engine
+(Reaction / MSDS RAG)
+Electronics Engine
+(Pinouts / Circuit Rules)
+CS / Study / Extensible
+(Code AST, Socratic)
+Response Synthesizer
+(School Server LLM)
+Voice TTS +
+Pointer Arm
+Pass
+Instant Safety Alarm (Bypass LLM)
+Figure 2: Real-time domain intent routing pipeline with deterministic zero-latency safety override.
+3
+=== PAGE 4 ===
+Distributed Network Architecture & Quantitative Evaluation
+School-Wide Deployment Topology, Cost Scaling Analysis, and Dual Delivery Validation
+3.5. Graph 3: Distributed University LAN Deployment T opology
+Central University Server (Existing Department Hardware)
+Ollama / vLLM (4-bit LLaMA-3 8B)•ChromaDB RAG•Professor Dashboard
+High-Speed University Local Area Network (Gigabit Ethernet Switch / Enterprise Wi-Fi 6 Router)
+Lab Workbench 1
+RPi 4 Client ($71)
+Webcam + Pointer
+Lab Workbench 2
+RPi 4 Client ($71)
+Webcam + Pointer
+Lab WorkbenchN
+RPi 4 Client ($71)
+Webcam + Pointer
+Remote Web 3D Sim
+WebGL Digital Twin
+Distance Learners
+W ebSockets
+Figure 3: Campus LAN topology illustrating one central server feedingNlow-cost bench nodes and remote WebGL simulators.
+3.6. Quantitative Performance & Cost Scaling Evaluation
+5 Benches 10 Benches 20 Benches 30 Benches
+0
+2
+4
+·104
+6,565
+13,130
+26,260
+39,390
+355 710 1,420 2,130
+Number of Workbench Stations in Laboratory
+Total Capital Cost (USD $)
+Industrial Jetson Baseline
+IQO Bot Proposed (Low-Cost)
+Graph 4: Laboratory Capital Expense Scaling (>94%Savings).
+Time (ms)
+0 100 200 300 350
+Audio 80msLAN Server LLM 175msActuate 65ms
+Total≈350ms
+Graph 5: End-to-End Latency Breakdown (<350ms Real-Time Loop).
+Performance Highlights:
+•Token Rate:32–45tok/s on university server.
+•Zero Cloud Fees:$0 recurring operating cost.
+•Safety Trigger:<20ms local deterministic cut-off.
+3.7. Dual F orm F actor Delivery: Physical Robot vs. 3D W eb Simulator
+•Physical Benchtop Robot:Stationary C-clamp chassis mounted directly to workbench frame (eliminating wheeled
+locomotion to avoid tipping over sensitive glassware or high-voltage lines). Features a 2-DOF pan-tilt head with
+expressive LED eye display and a 3-DOF articulated pointer arm with an optical focus dot for indicating components.
+•3D Digital T win W eb Simulator:DevelopedinThree.js/WebGL,mirroringthephysicalrobot’sinversekinematics
+and laboratory environment in the browser. Allows distance learners and students preparing for practical sessions to
+run dry-run experiments using identical REST/WebSocket server APIs.
+3.8. Conclusion & Educational Roadmap
+IQO Bot demonstrates that modern embodied AI laboratory assistance does not require prohibitive per-bench capital
+investment. By centralizing neural intelligence on standard school servers and deploying $71 client nodes, academic
+institutions can scale personalized, real-time safety supervision and pedagogical guidance across entire laboratory co-
+horts. Future milestones include expanding real-time optical breadboard trace validation and multi-student cooperative
+conversational tracking.
+4

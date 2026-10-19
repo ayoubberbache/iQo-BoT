@@ -1,0 +1,41 @@
+{
+  "model_name": "EdgeChemNet",
+  "vocab_size": 202,
+  "max_seq_len": 32,
+  "d_model": 128,
+  "parameter_count": 329492,
+  "exported_files": {
+    "torchscript": "E:\\iQo-BoT\\chemistry_ai\\exports\\edge_chem_net.pt",
+    "onnx": "E:\\iQo-BoT\\chemistry_ai\\exports\\edge_chem_net.onnx",
+    "quantized_int8": "E:\\iQo-BoT\\chemistry_ai\\exports\\edge_chem_net_quantized.pt",
+    "embedded_header": "E:\\iQo-BoT\\chemistry_ai\\exports\\iqo_chem_embedded_config.h"
+  },
+  "class_mappings": {
+    "safety": [
+      "SAFE",
+      "INFO",
+      "WARNING",
+      "CRITICAL"
+    ],
+    "arm_target": [
+      "NONE",
+      "GOGGLE_RACK",
+      "EYEWASH_STATION",
+      "FUME_HOOD",
+      "CHEMICAL_WASTE",
+      "BURETTE_STAND",
+      "REAGENT_SHELF",
+      "BENCH_WORKSTATION"
+    ],
+    "intent": [
+      "TITRATION_GUIDANCE",
+      "REAGENT_COMPATIBILITY",
+      "SAFETY_EMERGENCY",
+      "PPE_VIOLATION",
+      "CALCULATION_STOICHIOMETRY",
+      "MSDS_INQUIRY",
+      "WASTE_DISPOSAL",
+      "GENERAL_LAB_PROCEDURE"
+    ]
+  }
+}

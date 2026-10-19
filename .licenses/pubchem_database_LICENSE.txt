@@ -1,0 +1,6 @@
+PubChem Data Usage Notification
+Timestamp: 2026-10-18T20:51:00+01:00
+Online queries to PubChem PUG-REST API comply with NIH/NLM terms and conditions:
+- Citation Guidelines: https://pubchem.ncbi.nlm.nih.gov/docs/citation-guidelines
+- PUG-REST API Policy: https://pubchem.ncbi.nlm.nih.gov/docs/pug-rest
+Data is streamed in-memory for model training without persistent bulk dataset downloads to disk.

@@ -1,0 +1,122 @@
+[
+  {
+    "chemical_a": "Concentrated Sulfuric Acid (H2SO4)",
+    "chemical_b": "Water (H2O)",
+    "hazard_level": "CRITICAL",
+    "reaction_type": "Violent Exothermic Hydration",
+    "hazard_description": "Adding water to concentrated sulfuric acid causes instantaneous localized boiling and violent acid splattering (-Delta H). Always add acid to water slowly with stirring.",
+    "warning_speech": "Danger! Never pour water directly into concentrated sulfuric acid. It produces extreme exothermic heat and violent acid splattering. Always add acid slowly to water.",
+    "lcd_message": "DANGER: WATER->ACID\nEXPLOSIVE SPLATTER!",
+    "led_color": "RED_FLASHING",
+    "arm_target": "EYEWASH_STATION",
+    "triggers": ["water into acid", "water to acid", "pour water into sulfuric", "dilute acid with water directly", "add water to h2so4"]
+  },
+  {
+    "chemical_a": "Concentrated Hydrochloric Acid (HCl)",
+    "chemical_b": "Water (H2O)",
+    "hazard_level": "WARNING",
+    "reaction_type": "Exothermic Dilution",
+    "hazard_description": "Adding water directly to concentrated hydrochloric acid releases corrosive hydrogen chloride gas and heat. Always add acid slowly to water in a fume hood.",
+    "warning_speech": "Caution! Always add hydrochloric acid to water, never water to acid, to prevent rapid heating and corrosive vapor release.",
+    "lcd_message": "CAUTION: ACID DILUTION\nADD ACID TO WATER",
+    "led_color": "AMBER",
+    "arm_target": "FUME_HOOD",
+    "triggers": ["water into hcl", "water to hydrochloric", "dilute hcl with water directly"]
+  },
+  {
+    "chemical_a": "Sodium Hypochlorite (Bleach, NaOCl)",
+    "chemical_b": "Ammonia (NH3 / NH4OH)",
+    "hazard_level": "CRITICAL",
+    "reaction_type": "Toxic Gas Synthesis",
+    "hazard_description": "Mixing bleach with ammonia forms toxic and potentially explosive chloramine gases (NH2Cl, NHCl2, NCl3), causing severe respiratory trauma and pulmonary edema.",
+    "warning_speech": "Critical safety hazard! Never mix bleach with ammonia. This reaction generates lethal chloramine gases. Evacuate immediately if fumes are detected.",
+    "lcd_message": "CRITICAL: BLEACH+NH3\nTOXIC CHLORAMINE GAS",
+    "led_color": "RED_FLASHING",
+    "arm_target": "FUME_HOOD",
+    "triggers": ["bleach and ammonia", "naocl and nh3", "mix bleach with ammonium", "bleach plus ammonia"]
+  },
+  {
+    "chemical_a": "Sodium Hypochlorite (Bleach, NaOCl)",
+    "chemical_b": "Acids (HCl, Vinegar, Citric, H2SO4)",
+    "hazard_level": "CRITICAL",
+    "reaction_type": "Poisonous Chlorine Gas Release",
+    "hazard_description": "Bleach reacts with acids to produce toxic chlorine gas (Cl2). Inhaling chlorine gas causes violent coughing, chemical burns to respiratory membranes, and asphyxiation.",
+    "warning_speech": "Danger! Mixing bleach with acid liberates deadly chlorine gas. Do not combine these reagents. Use a certified chemical fume hood.",
+    "lcd_message": "DANGER: BLEACH+ACID\nLETHAL CHLORINE GAS!",
+    "led_color": "RED_FLASHING",
+    "arm_target": "FUME_HOOD",
+    "triggers": ["bleach and acid", "bleach with hydrochloric", "bleach plus vinegar", "naocl and hcl"]
+  },
+  {
+    "chemical_a": "Sodium Cyanide / Potassium Cyanide (NaCN / KCN)",
+    "chemical_b": "Any Acid (HCl, H2SO4, HNO3)",
+    "hazard_level": "CRITICAL",
+    "reaction_type": "Lethal Hydrogen Cyanide Gas",
+    "hazard_description": "Cyanide salts combined with acids immediately release highly lethal hydrogen cyanide gas (HCN), inhibiting cellular respiration within seconds.",
+    "warning_speech": "Fatal hazard alert! Cyanide salts combined with acid produce deadly hydrogen cyanide gas. Never mix cyanides with acidic solutions.",
+    "lcd_message": "FATAL: CYANIDE+ACID\nHCN GAS RELEASE!",
+    "led_color": "RED_FLASHING",
+    "arm_target": "FUME_HOOD",
+    "triggers": ["cyanide and acid", "nacn and hcl", "cyanide with sulfuric", "kcn and acid"]
+  },
+  {
+    "chemical_a": "Nitric Acid (HNO3)",
+    "chemical_b": "Organic Solvents (Ethanol, Acetone, Acetic Acid)",
+    "hazard_level": "CRITICAL",
+    "reaction_type": "Violent Oxidation / Explosion",
+    "hazard_description": "Nitric acid is a potent oxidizer that reacts violently with organic solvents, resulting in spontaneous ignition, rapid overpressure, and toxic nitrogen dioxide fumes.",
+    "warning_speech": "Severe explosion risk! Nitric acid reacts violently with organic solvents. Do not mix nitric acid with alcohols or ketones.",
+    "lcd_message": "EXPLOSION HAZARD:\nHNO3 + ORGANIC SOLV",
+    "led_color": "RED_FLASHING",
+    "arm_target": "FUME_HOOD",
+    "triggers": ["nitric acid and ethanol", "hno3 and acetone", "nitric with alcohol", "nitric acid and organic"]
+  },
+  {
+    "chemical_a": "Potassium Permanganate (KMnO4)",
+    "chemical_b": "Glycerol / Concentrated Organics",
+    "hazard_level": "CRITICAL",
+    "reaction_type": "Hypergolic Spontaneous Combustion",
+    "hazard_description": "KMnO4 reacts with glycerol in an intensely exothermic autoignition reaction, producing high heat and open flames after a short induction delay.",
+    "warning_speech": "Warning! Potassium permanganate with glycerol produces spontaneous combustion and severe thermal fire. Keep strictly separated.",
+    "lcd_message": "FIRE HAZARD:\nKMNO4 AUTOIGNITION",
+    "led_color": "RED_FLASHING",
+    "arm_target": "CHEMICAL_WASTE",
+    "triggers": ["kmno4 and glycerol", "permanganate and glycerin", "permanganate with organic"]
+  },
+  {
+    "chemical_a": "Hydrogen Peroxide (H2O2 concentrated)",
+    "chemical_b": "Iron Salts / Transition Metals / Organics",
+    "hazard_level": "WARNING",
+    "reaction_type": "Catalytic Decomposition / Oxygen Release",
+    "hazard_description": "Concentrated peroxide undergoes rapid catalytic decomposition when exposed to transition metals (Fe2+, MnO2), causing vigorous boiling and aerosol ejection.",
+    "warning_speech": "Caution! Transition metal catalysts cause rapid peroxide decomposition, gas pressure spikes, and chemical boilover.",
+    "lcd_message": "CAUTION: PEROXIDE\nCATALYTIC DECOMP!",
+    "led_color": "AMBER",
+    "arm_target": "FUME_HOOD",
+    "triggers": ["peroxide and iron", "h2o2 with manganese", "peroxide catalytic decomposition"]
+  },
+  {
+    "chemical_a": "Sodium Metal (Na) / Potassium Metal (K)",
+    "chemical_b": "Water (H2O)",
+    "hazard_level": "CRITICAL",
+    "reaction_type": "Explosive Hydrogen Generation",
+    "hazard_description": "Alkali metals react violently with water, releasing flammable hydrogen gas and immense heat which ignites the hydrogen explosively.",
+    "warning_speech": "Critical hazard! Sodium and potassium react explosively with water, releasing self-igniting hydrogen gas. Store under mineral oil only.",
+    "lcd_message": "EXPLOSION: NA + H2O\nHYDROGEN FIRE!",
+    "led_color": "RED_FLASHING",
+    "arm_target": "CHEMICAL_WASTE",
+    "triggers": ["sodium in water", "potassium and water", "alkali metal with water", "na plus h2o"]
+  },
+  {
+    "chemical_a": "Silver Nitrate (AgNO3)",
+    "chemical_b": "Ammonia & Strong Base (NaOH)",
+    "hazard_level": "WARNING",
+    "reaction_type": "Tollens Fulminate Formation",
+    "hazard_description": "Prolonged standing or drying of ammoniacal silver solutions forms highly shock-sensitive silver nitride (fulminating silver) which detonates on touch.",
+    "warning_speech": "Caution! Ammoniacal silver solutions must be neutralized immediately after use to prevent explosive silver fulminate accumulation.",
+    "lcd_message": "WARNING: SILVER FULMINATE\nACIDIFY & DISCARD",
+    "led_color": "AMBER",
+    "arm_target": "CHEMICAL_WASTE",
+    "triggers": ["silver nitrate and ammonia", "tollens reagent disposal", "ammoniacal silver explosive"]
+  }
+]

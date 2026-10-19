@@ -1,0 +1,7 @@
+torch>=2.2
+numpy
+onnx
+onnxscript
+onnxruntime
+psutil
+huggingface_hub

@@ -1,0 +1,54 @@
+# IQO Bot - CHEMISTRY stack.  Llama brain name: iqo-chem
+#   docker compose up -d                       -> Ollama + builds the specialised brain (iqo-chem)
+#   docker compose --profile train run --rm trainer      -> trains EdgeChemNet, writes ./artifacts
+#   docker compose --profile run run --rm bot            -> terminal dashboard with the Llama brain
+name: iqo-chem
+services:
+  ollama:
+    image: ollama/ollama:latest
+    container_name: iqo-chem-ollama
+    volumes: ["ollama:/root/.ollama"]
+    # NVIDIA GPU (needs nvidia-container-toolkit): uncomment
+    # deploy: {resources: {reservations: {devices: [{driver: nvidia, count: all, capabilities: [gpu]}]}}}
+    healthcheck:
+      test: ["CMD", "ollama", "list"]
+      interval: 5s
+      timeout: 5s
+      retries: 40
+    restart: unless-stopped
+
+  llm-init:                      # one-shot: pull Llama 3 and create the specialised model
+    image: ollama/ollama:latest
+    depends_on: {ollama: {condition: service_healthy}}
+    environment:
+      OLLAMA_HOST: http://ollama:11434
+      BASE_MODEL: ${BASE_MODEL:-llama3.2:3b}     # use a larger Llama variant when hardware allows
+      BRAIN_NAME: iqo-chem
+    volumes: ["./llm:/llm:ro"]
+    entrypoint: ["/bin/sh", "/llm/init_llm.sh"]
+    restart: "no"
+
+  trainer:
+    profiles: ["train"]
+    build: .
+    mem_limit: 3g
+    cpus: 2
+    volumes: ["./artifacts:/artifacts"]
+    command: ["--epochs", "20"]
+
+  web:
+    profiles: ["run"]
+    build: .
+    ports: ["8081:8080"]
+    depends_on: {llm-init: {condition: service_completed_successfully}}
+    environment:
+      OLLAMA_HOST: http://ollama:11434
+      IQO_LLM_MODEL: iqo-chem
+      IQO_LLM_MODE: always
+      IQO_ARTIFACTS: /artifacts
+      PORT: "8080"
+    volumes: ["./artifacts:/artifacts:ro"]
+    entrypoint: ["python", "web_dashboard.py"]
+
+volumes:
+  ollama:

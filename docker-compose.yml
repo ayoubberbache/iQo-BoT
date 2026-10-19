@@ -1,0 +1,35 @@
+services:
+  train:
+    profiles: ["training"]
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: iqo-train:local
+    init: true
+    mem_limit: 3g
+    cpus: 2.0
+    environment:
+      PYTHONUNBUFFERED: "1"
+    volumes:
+      - ./artifacts:/artifacts
+    command: ["--epochs", "20"]
+
+  brain:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: iqo-train:local
+    init: true
+    environment:
+      PYTHONUNBUFFERED: "1"
+      LLAMA_URL: ${LLAMA_URL:-http://model-runner.docker.internal/engines/v1/chat/completions}
+      LLAMA_MODEL: ${LLAMA_MODEL:-llama3.2}
+      LLAMA_TIMEOUT: ${LLAMA_TIMEOUT:-90}
+    extra_hosts:
+      - "model-runner.docker.internal:host-gateway"
+    volumes:
+      - ./artifacts:/artifacts
+    entrypoint: ["python", "central_chat.py"]
+    command: ["--artifacts", "/artifacts"]
+    stdin_open: true
+    tty: true
